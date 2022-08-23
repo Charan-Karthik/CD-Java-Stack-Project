@@ -11,16 +11,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Login Reg Page</title>
+<title>FireTeam Finder Beta</title>
 <!-- get Bootstrap from web -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <!-- for CSS and/or JS -->
 <!-- <link rel="stylesheet" href="{{ CSS PATH }}"> -->
 <!-- <script src="{{ JS PATH }}"></script> -->
 </head>
-<body>
-	<div class="container">
-		<h1 class="text-center">Administrator Login and Registration</h1>
+<body style="background-color:#1d232f">
+	<div class="container mt-4">
+		<div class="d-flex justify-content-end align-items-center">
+			<a href="/" class="btn btn-outline-light">Home</a>
+		</div>
+	</div>
+	<div class="container mt-3">
+		<h1 class="text-center" style="color:white"> All Games </h1>
+		<div class="d-flex justify-content-center">
+			<a href="#" class="btn btn-success">Add a New Game</a>
+		</div>
 	</div>
 </body>
 </html>
