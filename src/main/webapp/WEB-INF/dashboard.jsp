@@ -71,7 +71,7 @@
 	</div>
 	<div
 		class="d-flex justify-content-center align-items-center fixed-bottom">
-		<a href="/all/games" class="btn btn-sm btn-outline-light">LFG Platform for Other Games (Beta)</a>
+		<a href="/all/games" class="btn btn-lg btn-outline-light">LFG Platform for Other Games</a>
 	</div>
 </body>
 </html>

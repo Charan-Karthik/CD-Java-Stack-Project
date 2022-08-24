@@ -58,7 +58,7 @@
 
 				<div class="form-group mb-3">
 					<form:label path="imageURL" class="form-label">Game Image URL:</form:label>
-					<form:input path="imageURL" class="form-control" />
+					<form:input path="imageURL" class="form-control" type="url"/>
 					<form:errors path="imageURL" class="text-danger" />
 				</div>
 

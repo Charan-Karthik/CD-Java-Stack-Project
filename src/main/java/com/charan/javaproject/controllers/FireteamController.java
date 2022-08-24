@@ -202,18 +202,17 @@ public class FireteamController {
 		}
 
 		Long userID = (Long) session.getAttribute("session_user_id");
-//		System.out.println(userID);
 
 		LFGRequest thisRequest = requestServ.findRequest(requestID);
 		model.addAttribute("thisRequest", thisRequest);
 
 		Long reqID = thisRequest.getRequestor().getId();
-//		System.out.println(reqID);
 
-//		there's a bug here...
-//		should work for "!=", but working for "=="
-		if (reqID == userID) {
-			return "redirect:/";
+		System.out.println(userID);
+		System.out.println(reqID);
+
+		if (reqID != userID) {
+			return "redirect:/logout";
 		}
 
 		return "editLFG.jsp";

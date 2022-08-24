@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>LFG Request Details</title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -26,7 +26,7 @@
 <body style="background-color: #1d232f; color: white">
 	<div class="container mt-4">
 		<div class="d-flex justify-content-between align-items-center">
-			<a href="/" class="btn btn-outline-light">Home</a>
+			<a href="/game/${thisGame.id}" class="btn btn-outline-light">All <c:out value="${thisGame.title}"/> Requests</a>
 			<c:if test="${username == null}">
 				<div class="d-flex justify-content-end align-items-center">
 					<a href="/loginreg" class="btn btn-outline-light">Sign Up/Log
@@ -81,8 +81,7 @@
 			<div class="mb-5">
 				<h4>Player Count</h4>
 				<p>
-					<c:out
-						value="${thisRequest.playersPresent}" />
+					<c:out value="${thisRequest.playersPresent}" />
 					/
 					<c:out value="${thisRequest.playerLimit}" />
 				</p>
@@ -94,6 +93,20 @@
 					<c:out value="${thisRequest.description}" />
 				</p>
 			</div>
+		</div>
+
+		<div>
+			<c:if test="${session_user_id == thisRequest.gameRequestor.id}">
+				<div class="d-flex justify-content-around align-items-center">
+					<a href="/edit/game/request/${thisRequest.id}"
+						class="btn btn-warning">Edit LFG Request</a>
+					<form action="/delete/game/request/${thisRequest.id}"
+						method="post">
+						<input type="hidden" name="_method" value="delete"> <input
+							type="submit" value="Delete" class="btn btn-danger">
+					</form>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

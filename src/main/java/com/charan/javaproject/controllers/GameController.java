@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -140,7 +141,8 @@ public class GameController {
 	}
 
 	@GetMapping("/game/{gameID}/request/{reqID}")
-	public String oneSpecificGameReq(@PathVariable("gameID") Long gameID, @PathVariable("reqID") Long requestID,HttpSession session, Model model) {
+	public String oneSpecificGameReq(@PathVariable("gameID") Long gameID, @PathVariable("reqID") Long requestID,
+			HttpSession session, Model model) {
 		if (session.getAttribute("session_user_id") != null) {
 
 			Long userID = (Long) session.getAttribute("session_user_id");
@@ -148,13 +150,70 @@ public class GameController {
 
 			model.addAttribute("username", loggedInUser.getUsername());
 		}
-		
+
 		Game thisGame = gameServ.findGame(gameID);
 		GameRequest thisRequest = gameReqServ.findGameRequest(requestID);
 		model.addAttribute("thisGame", thisGame);
 		model.addAttribute("thisRequest", thisRequest);
 
 		return "oneReq.jsp";
+	}
+
+	@GetMapping("/edit/game/request/{id}")
+	public String editGameRequestPage(@PathVariable("id") Long gameRequestID, Model model, HttpSession session) {
+		// we don't want this page to render if there is no user in session
+		if (session.getAttribute("session_user_id") == null) {
+			return "redirect:/loginreg";
+		}
+
+		GameRequest oneRequest = gameReqServ.findGameRequest(gameRequestID);
+		model.addAttribute("oneRequest", oneRequest);
+		
+		Long userID = (Long) session.getAttribute("session_user_id");
+		
+		System.out.println(oneRequest.getGameRequestor().getId());
+		System.out.println(userID);
+		
+		if (userID != oneRequest.getGameRequestor().getId()) {
+			return "redirect:/logout";
+		}
+
+		return "editGameRequest.jsp";
+	}
+
+	@PostMapping("/edit/game/request/submit")
+	public String submitEdits(@Valid @ModelAttribute("oneRequest") GameRequest editedReq, BindingResult result,
+			HttpSession session, Model model) {
+		// we don't want this page to render if there is no user in session
+		if (session.getAttribute("session_user_id") == null) {
+			return "redirect:/loginreg";
+		}
+
+		if (result.hasErrors()) {
+			return "editGameRequest.jsp";
+		} else {
+			gameReqServ.updateGameRequest(editedReq);
+
+			Long gameID = editedReq.getSpecificGame().getId();
+
+			return "redirect:/game/" + gameID;
+		}
+
+	}
+
+	@DeleteMapping("/delete/game/request/{id}")
+	public String deleteGameReq(@PathVariable("id") Long reqID, HttpSession session) {
+		// we don't want this page to render if there is no user in session
+		if (session.getAttribute("session_user_id") == null) {
+			return "redirect:/loginreg";
+		}
+
+		GameRequest oneReq = gameReqServ.findGameRequest(reqID);
+		Long gameID = oneReq.getSpecificGame().getId();
+
+		gameReqServ.deleteGameRequest(reqID);
+
+		return "redirect:/game/" + gameID;
 	}
 
 }

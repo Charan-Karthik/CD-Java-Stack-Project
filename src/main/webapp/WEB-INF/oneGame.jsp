@@ -30,7 +30,7 @@
 <body style="background-color: #1d232f; color: white">
 	<div class="container mt-4">
 		<div class="d-flex justify-content-between align-items-center">
-			<a href="/" class="btn btn-outline-light">Home</a>
+			<a href="/all/games" class="btn btn-outline-light">All Games</a>
 			<c:if test="${username == null}">
 				<div class="d-flex justify-content-end align-items-center">
 					<a href="/loginreg" class="btn btn-outline-light">Sign Up/Log
