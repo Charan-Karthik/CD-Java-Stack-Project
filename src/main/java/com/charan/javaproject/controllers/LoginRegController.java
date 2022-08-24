@@ -60,10 +60,24 @@ public class LoginRegController {
 			return "redirect:/";
 		}
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+
+	@GetMapping("/account/info")
+	public String accountIngoPage(HttpSession session, Model model) {
+		// we don't want this page to render if there is no user in session
+		if (session.getAttribute("session_user_id") == null) {
+			return "redirect:/loginreg";
+		}
+		
+		Long userID = (Long) session.getAttribute("session_user_id");
+		User thisUser = userServ.findUser(userID);
+		model.addAttribute("thisUser", thisUser);
+
+		return "accountInfo.jsp";
 	}
 }

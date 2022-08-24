@@ -12,22 +12,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FireTeam Finder Beta</title>
+<title>Insert title here</title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-	crossorigin="anonymous"></script>
 <!-- for CSS and/or JS -->
 <!-- <link rel="stylesheet" href="{{ CSS PATH }}"> -->
 <!-- <script src="{{ JS PATH }}"></script> -->
 </head>
-<body style="background-color: #1d232f">
+<body style="background-color: #1d232f; color: white">
 	<div class="container mt-4">
 		<div class="d-flex justify-content-between align-items-center">
 			<a href="/" class="btn btn-outline-light">Home</a>
@@ -51,27 +47,53 @@
 				</div>
 			</c:if>
 		</div>
-	</div>
-	<div class="container mt-3 mb-5">
-		<h1 class="text-center" style="color: white">All Games</h1>
-		<div class="d-flex justify-content-center">
-			<a href="/new/game" class="btn btn-success">Add a New Game</a>
-		</div>
-	</div>
-	<div class="container">
-		<div class="d-flex justify-content-evenly flex-wrap">
-			<c:forEach var="g" items="${allGames}">
-				<div class="card mb-4" style="width: 18rem;">
-					<img src="${g.imageURL}" class="card-img-top"
-						alt="${g.title} game art">
-					<div class="card-body text-center" style="background-color:#C0C0C0">
-						<h5 class="card-title">
-							<c:out value="${g.title}" />
-						</h5>
-						<a href="/game/${g.id}" class="btn btn-primary">View LFG Requests</a>
-					</div>
-				</div>
-			</c:forEach>
+
+		<h1 class="text-center mt-3">
+			<c:out value="${thisGame.title}" />
+			LFG Request Details
+		</h1>
+
+		<div class="text-center mt-5">
+			<div class="mb-5">
+				<h4>Platform</h4>
+				<p>
+					<c:out value="${thisRequest.platform}" />
+				</p>
+			</div>
+
+			<div class="mb-5">
+				<h4>Gamertag</h4>
+				<h5>
+					<em>(for contacting player)</em>
+				</h5>
+				<p>
+					<c:out value="${thisRequest.gamertag}" />
+				</p>
+			</div>
+
+			<div class="mb-5">
+				<h4>Activity</h4>
+				<p>
+					<c:out value="${thisRequest.activity}" />
+				</p>
+			</div>
+
+			<div class="mb-5">
+				<h4>Player Count</h4>
+				<p>
+					<c:out
+						value="${thisRequest.playersPresent}" />
+					/
+					<c:out value="${thisRequest.playerLimit}" />
+				</p>
+			</div>
+
+			<div class="mb-5">
+				<h4>Description</h4>
+				<p>
+					<c:out value="${thisRequest.description}" />
+				</p>
+			</div>
 		</div>
 	</div>
 </body>

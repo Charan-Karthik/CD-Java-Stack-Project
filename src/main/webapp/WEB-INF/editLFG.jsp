@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fireteam Finder - Create Request</title>
+<title>Fireteam Finder - Edit LFG Request</title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -43,11 +43,15 @@
 			</div>
 		</div>
 
-		<h1 class="text-center mt-2 mb-4">Create an LFG Request</h1>
+		<h1 class="text-center mt-2 mb-4">Edit Your LFG Request</h1>
 
 		<div class="d-flex justify-content-center">
-			<form:form action="/destiny/create/request/submit" method="post"
-				modelAttribute="newReq" class="w-50">
+			<form:form action="/destiny/request/submit/changes" method="post"
+				modelAttribute="thisRequest" class="w-50">
+				
+				<input type="hidden" name="_method" value="put">
+				<form:input type="hidden" path="id" />
+				<form:input type="hidden" path="requestor" />
 
 				<div class="form-group mb-3">
 					<form:label path="platform" class="form-label">Game Platform:</form:label>
@@ -59,7 +63,7 @@
 					</form:select>
 					<form:errors path="platform" class="text-danger" />
 				</div>
-				
+
 				<div class="form-group mb-3">
 					<form:label path="gamertag" class="form-label">Gamertag (for contacting purposes):</form:label>
 					<form:input path="gamertag" class="form-control" />
@@ -92,8 +96,9 @@
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center">
-					<a href="/" class="btn btn-warning">Cancel</a> <input type="submit"
-						value="Submit" class="btn btn-success" />
+					<a href="/destiny/activity/${thisRequest.id}"
+						class="btn btn-warning">Cancel</a> <input type="submit"
+						value="Submit Changes" class="btn btn-success" />
 				</div>
 			</form:form>
 		</div>

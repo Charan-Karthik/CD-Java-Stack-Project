@@ -44,5 +44,10 @@ public class LFGRequestService {
 	public void deleteRequest(Long id) {
 		requestRepo.deleteById(id);
 	}
+	
+	// Find requests by platform
+	public List<LFGRequest> requestsByPlatform(String platform){
+		return requestRepo.findByPlatform(platform);
+	}
 
 }

@@ -19,6 +19,10 @@
 	rel="stylesheet"
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+	crossorigin="anonymous"></script>
 <!-- for CSS and/or JS -->
 <!-- <link rel="stylesheet" href="{{ CSS PATH }}"> -->
 <!-- <script src="{{ JS PATH }}"></script> -->
@@ -34,8 +38,15 @@
 				</div>
 			</c:if>
 			<c:if test="${username != null}">
-				<div class="d-flex justify-content-end align-items-center">
-					<a href="/logout" class="btn btn-outline-danger">Log Out</a>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item text-danger" href="/logout">Log
+								Out</a></li>
+					</ul>
 				</div>
 			</c:if>
 		</div>
@@ -47,6 +58,16 @@
 				<h4>Platform</h4>
 				<p>
 					<c:out value="${oneRequest.platform}" />
+				</p>
+			</div>
+
+			<div class="mb-5">
+				<h4>Gamertag</h4>
+				<h5>
+					<em>(for contacting player)</em>
+				</h5>
+				<p>
+					<c:out value="${oneRequest.gamertag}" />
 				</p>
 			</div>
 
@@ -77,15 +98,20 @@
 
 		<br />
 
-<%-- 		<div>
+		<div>
 			<c:choose>
 				<c:when test="${session_user_id == oneRequest.requestor.id}">
-					<div class="d-flex justify-content-center">
-						<a href="/delete/${oneRequest.id}" class="btn btn-danger">Delete LFG Posting</a>
+					<div class="d-flex justify-content-around align-items-center">
+						<a href="/destiny/request/edit/${oneRequest.id}"
+							class="btn btn-warning">Edit LFG Request</a>
+						<form action="/destiny/request/delete/${oneRequest.id}" method="post">
+							<input type="hidden" name="_method" value="delete"> <input
+								type="submit" value="Delete" class="btn btn-danger">
+						</form>
 					</div>
 				</c:when>
 				<c:otherwise>
-					<c:if test="${username == null}">
+<%-- 					<c:if test="${username == null}">
 						<div class="d-flex justify-content-center align-items-center">
 							<a href="/loginreg" class="btn btn-primary">Sign Up/Log In to
 								Join Fireteam!</a>
@@ -95,10 +121,10 @@
 						<div class="d-flex justify-content-center align-items-center">
 							<a href="#" class="btn btn-primary">Join Fireteam</a>
 						</div>
-					</c:if>
+					</c:if> --%>
 				</c:otherwise>
 			</c:choose>
-		</div> --%>
+		</div>
 	</div>
 </body>
 </html>

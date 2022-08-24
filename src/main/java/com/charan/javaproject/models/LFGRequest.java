@@ -29,6 +29,9 @@ public class LFGRequest {
 
 	@NotNull(message="Must select a platform")
 	private String platform;
+	
+	@Size(min=1, message = "Gamertag must be at least one character long")
+	private String gamertag;
 
 	@Size(min = 1, message = "Activity field must be at least one character long")
 	private String activity;
@@ -144,5 +147,13 @@ public class LFGRequest {
 
 	public void setGuardiansNeeded(Integer guardiansNeeded) {
 		this.guardiansNeeded = guardiansNeeded;
+	}
+
+	public String getGamertag() {
+		return gamertag;
+	}
+
+	public void setGamertag(String gamertag) {
+		this.gamertag = gamertag;
 	}
 }

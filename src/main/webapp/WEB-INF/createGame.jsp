@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FireteamFinder - Dashboard</title>
+<title>Fireteam Finder - Create Game</title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -24,54 +24,50 @@
 	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 	crossorigin="anonymous"></script>
 <!-- for CSS and/or JS -->
-<link rel="stylesheet" href="/CSS/dashboardStyle.css">
+<!-- <link rel="stylesheet" href="{{ CSS PATH }}"> -->
 <!-- <script src="{{ JS PATH }}"></script> -->
 </head>
-<body>
-	<div class="container mt-4 fixed-top">
-		<c:if test="${username == null}">
-			<div class="d-flex justify-content-end align-items-center">
-				<a href="/loginreg" class="btn btn-dark">Sign Up/Log In</a>
-			</div>
-		</c:if>
-		<c:if test="${username != null}">
-			<div class="dropdown d-flex justify-content-end">
+<body style="background-color: #1d232f; color: white">
+	<div class="container mt-4">
+		<div class="d-flex justify-content-between align-items-center">
+			<a href="/" class="btn btn-outline-light">Home</a>
+			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button"
 					data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
+					<li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item text-danger" href="/logout">Log
 							Out</a></li>
 				</ul>
 			</div>
-		</c:if>
-	</div>
-	<div class="mainContainer">
-		<h1 style="color: #FFD700">Destiny 2: Fireteam Finder</h1>
-		<div>
-			<p style="color: #C0C0C0">
-				<em>Select Platform</em>
-			</p>
 		</div>
-		<div id="platformSelector">
-			<div>
-				<a href="/destiny/groups/all/platforms" class="btn btn-secondary">ANY</a>
-			</div>
-			<div>
-				<a href="/destiny/groups/playstation" class="btn btn-primary">PlayStation</a>
-			</div>
-			<div>
-				<a href="/destiny/groups/xbox" class="btn btn-success">XBox</a>
-			</div>
-			<div>
-				<a href="/destiny/groups/pc" class="btn btn-info">PC</a>
-			</div>
+
+		<h1 class="text-center mt-3 mb-4">Add a Game for LFG Requests!</h1>
+
+		<div class="d-flex justify-content-center">
+			<form:form action="/create/game" method="post"
+				modelAttribute="newGame" class="w-50">
+
+				<div class="form-group mb-3">
+					<form:label path="title" class="form-label">Game Title:</form:label>
+					<form:input path="title" class="form-control" />
+					<form:errors path="title" class="text-danger" />
+				</div>
+
+				<div class="form-group mb-3">
+					<form:label path="imageURL" class="form-label">Game Image URL:</form:label>
+					<form:input path="imageURL" class="form-control" />
+					<form:errors path="imageURL" class="text-danger" />
+				</div>
+
+				<div class="d-flex justify-content-between align-items-center">
+					<a href="/all/games" class="btn btn-warning">Cancel</a> <input type="submit"
+						value="Submit" class="btn btn-success" />
+				</div>
+			</form:form>
 		</div>
-	</div>
-	<div
-		class="d-flex justify-content-center align-items-center fixed-bottom">
-		<a href="/all/games" class="btn btn-sm btn-outline-light">LFG Platform for Other Games (Beta)</a>
 	</div>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fireteam Finder - Create Request</title>
+<title>Create Specific Game Request</title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -35,7 +35,8 @@
 				<button class="btn btn-secondary dropdown-toggle" type="button"
 					data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
+					<li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
 					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item text-danger" href="/logout">Log
 							Out</a></li>
@@ -43,11 +44,15 @@
 			</div>
 		</div>
 
-		<h1 class="text-center mt-2 mb-4">Create an LFG Request</h1>
+		<h1 class="text-center mt-3 mb-4">
+			Create LFG Request for "
+			<c:out value="${thisGame.title}" />
+			"
+		</h1>
 
 		<div class="d-flex justify-content-center">
-			<form:form action="/destiny/create/request/submit" method="post"
-				modelAttribute="newReq" class="w-50">
+			<form:form action="/game/${thisGame.id}/create/request" method="post" modelAttribute="newGameReq"
+				class="w-50">
 
 				<div class="form-group mb-3">
 					<form:label path="platform" class="form-label">Game Platform:</form:label>
@@ -56,10 +61,12 @@
 						<form:option value="PlayStation">PlayStation</form:option>
 						<form:option value="Xbox">Xbox</form:option>
 						<form:option value="PC">PC</form:option>
+						<form:option value="Switch">Nintendo Switch</form:option>
+						<form:option value="Mobile">Mobile</form:option>
 					</form:select>
 					<form:errors path="platform" class="text-danger" />
 				</div>
-				
+
 				<div class="form-group mb-3">
 					<form:label path="gamertag" class="form-label">Gamertag (for contacting purposes):</form:label>
 					<form:input path="gamertag" class="form-control" />
@@ -73,16 +80,16 @@
 				</div>
 
 				<div class="form-group mb-3">
-					<form:label path="guardianLimit" class="form-label">Guardian Limit for Activity:</form:label>
-					<form:input path="guardianLimit" class="form-control" type="number" />
-					<form:errors path="guardianLimit" class="text-danger" />
+					<form:label path="playerLimit" class="form-label">Player Limit for Activity:</form:label>
+					<form:input path="playerLimit" class="form-control" type="number" />
+					<form:errors path="playerLimit" class="text-danger" />
 				</div>
 
 				<div class="form-group mb-3">
-					<form:label path="guardiansNeeded" class="form-label">Number of Guardians Still Needed:</form:label>
-					<form:input path="guardiansNeeded" class="form-control"
+					<form:label path="playersPresent" class="form-label">Number of Players Already Present for Activity:</form:label>
+					<form:input path="playersPresent" class="form-control"
 						type="number" />
-					<form:errors path="guardiansNeeded" class="text-danger" />
+					<form:errors path="playersPresent" class="text-danger" />
 				</div>
 
 				<div class="form-group mb-4">
@@ -92,8 +99,8 @@
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center">
-					<a href="/" class="btn btn-warning">Cancel</a> <input type="submit"
-						value="Submit" class="btn btn-success" />
+					<a href="/game/${thisGame.id}" class="btn btn-warning">Cancel</a> <input
+						type="submit" value="Submit" class="btn btn-success" />
 				</div>
 			</form:form>
 		</div>

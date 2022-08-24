@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FireTeam Finder Beta</title>
+<title>Fireteam Finder - Destiny LFG PlayStation</title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -27,7 +27,7 @@
 <!-- <link rel="stylesheet" href="{{ CSS PATH }}"> -->
 <!-- <script src="{{ JS PATH }}"></script> -->
 </head>
-<body style="background-color: #1d232f">
+<body style="background-color: #1d232f; color: white">
 	<div class="container mt-4">
 		<div class="d-flex justify-content-between align-items-center">
 			<a href="/" class="btn btn-outline-light">Home</a>
@@ -42,8 +42,7 @@
 					<button class="btn btn-secondary dropdown-toggle" type="button"
 						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/account/info">Account
-								Info</a></li>
+						<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item text-danger" href="/logout">Log
 								Out</a></li>
@@ -51,28 +50,37 @@
 				</div>
 			</c:if>
 		</div>
-	</div>
-	<div class="container mt-3 mb-5">
-		<h1 class="text-center" style="color: white">All Games</h1>
+
+		<h1 class="text-center">Destiny 2 LFG Requests: PlayStation</h1>
 		<div class="d-flex justify-content-center">
-			<a href="/new/game" class="btn btn-success">Add a New Game</a>
+			<a href="/destiny/create/request" class="btn btn-success">Create
+				LFG Request</a>
 		</div>
-	</div>
-	<div class="container">
-		<div class="d-flex justify-content-evenly flex-wrap">
-			<c:forEach var="g" items="${allGames}">
-				<div class="card mb-4" style="width: 18rem;">
-					<img src="${g.imageURL}" class="card-img-top"
-						alt="${g.title} game art">
-					<div class="card-body text-center" style="background-color:#C0C0C0">
-						<h5 class="card-title">
-							<c:out value="${g.title}" />
-						</h5>
-						<a href="/game/${g.id}" class="btn btn-primary">View LFG Requests</a>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
+
+		<table class="table table-dark table-striped mt-5 text-center">
+			<thead>
+				<tr>
+					<th>Platform</th>
+					<th>Activity</th>
+					<th>Guardian Count</th>
+					<th>Request Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${playstationRequests}" var="req">
+					<tr>
+						<td><c:out value="${req.platform}" /></td>
+						<td><a href="/destiny/activity/${req.id}"
+							style="color: white"><c:out value="${req.activity}" /></a></td>
+						<td><c:out value="${req.guardianLimit - req.guardiansNeeded}" />/<c:out
+								value="${req.guardianLimit}" /></td>
+						<%-- <td><c:out value="${req.getCreatedAt()}" /></td> --%>
+						<td><fmt:formatDate pattern="yyyy-MM-dd @ hh:mm a z" value="${req.getCreatedAt()}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+
 	</div>
 </body>
 </html>

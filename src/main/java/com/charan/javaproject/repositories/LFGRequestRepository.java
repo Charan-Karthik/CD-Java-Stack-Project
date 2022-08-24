@@ -11,5 +11,7 @@ import com.charan.javaproject.models.LFGRequest;
 public interface LFGRequestRepository extends CrudRepository<LFGRequest, Long> {
 
 	List<LFGRequest> findAll();
+	
+	List<LFGRequest> findByPlatform(String platform);
 
 }

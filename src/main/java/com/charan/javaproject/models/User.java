@@ -46,6 +46,11 @@ public class User {
 	@OneToMany(mappedBy="requestor",fetch=FetchType.LAZY)
 	private List<LFGRequest> requests;
 	
+	@OneToMany(mappedBy="poster", fetch=FetchType.LAZY)
+	private List<Game> games;
+	
+	@OneToMany(mappedBy="gameRequestor", fetch=FetchType.LAZY)
+	private List<GameRequest> gameRequests;
 
 //	CREATED AT AND UPDATED AT
 	@Column(updatable = false)
@@ -132,6 +137,22 @@ public class User {
 
 	public void setRequests(List<LFGRequest> requests) {
 		this.requests = requests;
+	}
+
+	public List<Game> getGames() {
+		return games;
+	}
+
+	public void setGames(List<Game> games) {
+		this.games = games;
+	}
+
+	public List<GameRequest> getGameRequests() {
+		return gameRequests;
+	}
+
+	public void setGameRequests(List<GameRequest> gameRequests) {
+		this.gameRequests = gameRequests;
 	}
 
 }
