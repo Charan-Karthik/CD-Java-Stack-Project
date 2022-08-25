@@ -40,10 +40,14 @@
 			<c:if test="${username != null}">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
-						<li><hr class="dropdown-divider"></li>
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Welcome,
+						<c:out value="${username}" />
+					</button>
+					<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+						<!-- <li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
+					<li><hr class="dropdown-divider"></li> -->
 						<li><a class="dropdown-item text-danger" href="/logout">Log
 								Out</a></li>
 					</ul>
@@ -75,7 +79,8 @@
 						<td><c:out value="${req.guardianLimit - req.guardiansNeeded}" />/<c:out
 								value="${req.guardianLimit}" /></td>
 						<%-- <td><c:out value="${req.getCreatedAt()}" /></td> --%>
-						<td><fmt:formatDate pattern="yyyy-MM-dd @ hh:mm a z" value="${req.getCreatedAt()}" /></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd @ hh:mm a z"
+								value="${req.getCreatedAt()}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

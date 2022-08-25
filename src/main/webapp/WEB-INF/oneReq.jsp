@@ -19,6 +19,10 @@
 	rel="stylesheet"
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+	crossorigin="anonymous"></script>
 <!-- for CSS and/or JS -->
 <!-- <link rel="stylesheet" href="{{ CSS PATH }}"> -->
 <!-- <script src="{{ JS PATH }}"></script> -->
@@ -26,7 +30,9 @@
 <body style="background-color: #1d232f; color: white">
 	<div class="container mt-4">
 		<div class="d-flex justify-content-between align-items-center">
-			<a href="/game/${thisGame.id}" class="btn btn-outline-light">All <c:out value="${thisGame.title}"/> Requests</a>
+			<a href="/game/${thisGame.id}" class="btn btn-outline-light">All
+				<c:out value="${thisGame.title}" /> Requests
+			</a>
 			<c:if test="${username == null}">
 				<div class="d-flex justify-content-end align-items-center">
 					<a href="/loginreg" class="btn btn-outline-light">Sign Up/Log
@@ -36,11 +42,14 @@
 			<c:if test="${username != null}">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/account/info">Account
-								Info</a></li>
-						<li><hr class="dropdown-divider"></li>
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Welcome,
+						<c:out value="${username}" />
+					</button>
+					<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+						<!-- <li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
+					<li><hr class="dropdown-divider"></li> -->
 						<li><a class="dropdown-item text-danger" href="/logout">Log
 								Out</a></li>
 					</ul>
@@ -100,8 +109,7 @@
 				<div class="d-flex justify-content-around align-items-center">
 					<a href="/edit/game/request/${thisRequest.id}"
 						class="btn btn-warning">Edit LFG Request</a>
-					<form action="/delete/game/request/${thisRequest.id}"
-						method="post">
+					<form action="/delete/game/request/${thisRequest.id}" method="post">
 						<input type="hidden" name="_method" value="delete"> <input
 							type="submit" value="Delete" class="btn btn-danger">
 					</form>

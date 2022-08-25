@@ -33,11 +33,14 @@
 			<a href="/" class="btn btn-outline-light">Home</a>
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/account/info">Account
+					data-bs-toggle="dropdown" aria-expanded="false">
+					Welcome,
+					<c:out value="${username}" />
+				</button>
+				<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+					<!-- <li><a class="dropdown-item" href="/account/info">Account
 							Info</a></li>
-					<li><hr class="dropdown-divider"></li>
+					<li><hr class="dropdown-divider"></li> -->
 					<li><a class="dropdown-item text-danger" href="/logout">Log
 							Out</a></li>
 				</ul>
@@ -58,13 +61,13 @@
 
 				<div class="form-group mb-3">
 					<form:label path="imageURL" class="form-label">Game Image URL:</form:label>
-					<form:input path="imageURL" class="form-control" type="url"/>
+					<form:input path="imageURL" class="form-control" type="url" />
 					<form:errors path="imageURL" class="text-danger" />
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center">
-					<a href="/all/games" class="btn btn-warning">Cancel</a> <input type="submit"
-						value="Submit" class="btn btn-success" />
+					<a href="/all/games" class="btn btn-warning">Cancel</a> <input
+						type="submit" value="Submit" class="btn btn-success" />
 				</div>
 			</form:form>
 		</div>

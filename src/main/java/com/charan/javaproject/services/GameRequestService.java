@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.charan.javaproject.models.Game;
 import com.charan.javaproject.models.GameRequest;
 import com.charan.javaproject.repositories.GameRequestRepository;
 
@@ -43,6 +44,16 @@ public class GameRequestService {
 	// Delete
 	public void deleteGameRequest(Long id) {
 		gameReqRepo.deleteById(id);
+	}
+	
+	// Find all by created at in descending order
+	public List<GameRequest> orderedGameReqs(Game game) {
+		return gameReqRepo.findAllBySpecificGameOrderByCreatedAtDesc(game);
+	}
+	
+	// requests older than specified time period
+	public List<GameRequest> oldReqsOnly(Game game) {
+		return gameReqRepo.olderReqs(game);
 	}
 
 }

@@ -33,11 +33,14 @@
 			<a href="/" class="btn btn-outline-light">Home</a>
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/account/info">Account
+					data-bs-toggle="dropdown" aria-expanded="false">
+					Welcome,
+					<c:out value="${username}" />
+				</button>
+				<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+					<!-- <li><a class="dropdown-item" href="/account/info">Account
 							Info</a></li>
-					<li><hr class="dropdown-divider"></li>
+					<li><hr class="dropdown-divider"></li> -->
 					<li><a class="dropdown-item text-danger" href="/logout">Log
 							Out</a></li>
 				</ul>

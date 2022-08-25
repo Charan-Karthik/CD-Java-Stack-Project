@@ -40,11 +40,14 @@
 			<c:if test="${username != null}">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/account/info">Account
-								Info</a></li>
-						<li><hr class="dropdown-divider"></li>
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Welcome,
+						<c:out value="${username}" />
+					</button>
+					<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+						<!-- <li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
+					<li><hr class="dropdown-divider"></li> -->
 						<li><a class="dropdown-item text-danger" href="/logout">Log
 								Out</a></li>
 					</ul>
@@ -64,11 +67,13 @@
 				<div class="card mb-4" style="width: 18rem;">
 					<img src="${g.imageURL}" class="card-img-top"
 						alt="${g.title} game art">
-					<div class="card-body text-center" style="background-color:#C0C0C0">
+					<div class="card-body text-center"
+						style="background-color: #C0C0C0">
 						<h5 class="card-title">
 							<c:out value="${g.title}" />
 						</h5>
-						<a href="/game/${g.id}" class="btn btn-primary">View LFG Requests</a>
+						<a href="/game/${g.id}" class="btn btn-primary">View LFG
+							Requests</a>
 					</div>
 				</div>
 			</c:forEach>

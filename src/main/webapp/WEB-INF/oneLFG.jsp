@@ -40,10 +40,14 @@
 			<c:if test="${username != null}">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
-						<li><hr class="dropdown-divider"></li>
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Welcome,
+						<c:out value="${username}" />
+					</button>
+					<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+						<!-- <li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
+					<li><hr class="dropdown-divider"></li> -->
 						<li><a class="dropdown-item text-danger" href="/logout">Log
 								Out</a></li>
 					</ul>
@@ -104,14 +108,15 @@
 					<div class="d-flex justify-content-around align-items-center">
 						<a href="/destiny/request/edit/${oneRequest.id}"
 							class="btn btn-warning">Edit LFG Request</a>
-						<form action="/destiny/request/delete/${oneRequest.id}" method="post">
+						<form action="/destiny/request/delete/${oneRequest.id}"
+							method="post">
 							<input type="hidden" name="_method" value="delete"> <input
 								type="submit" value="Delete" class="btn btn-danger">
 						</form>
 					</div>
 				</c:when>
 				<c:otherwise>
-<%-- 					<c:if test="${username == null}">
+					<%-- 					<c:if test="${username == null}">
 						<div class="d-flex justify-content-center align-items-center">
 							<a href="/loginreg" class="btn btn-primary">Sign Up/Log In to
 								Join Fireteam!</a>

@@ -67,17 +67,38 @@ public class LoginRegController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/account/info")
-	public String accountIngoPage(HttpSession session, Model model) {
-		// we don't want this page to render if there is no user in session
-		if (session.getAttribute("session_user_id") == null) {
-			return "redirect:/loginreg";
-		}
-		
-		Long userID = (Long) session.getAttribute("session_user_id");
-		User thisUser = userServ.findUser(userID);
-		model.addAttribute("thisUser", thisUser);
-
-		return "accountInfo.jsp";
-	}
+//	@GetMapping("/account/info")
+//	public String accountIngoPage(HttpSession session, Model model) {
+//		// we don't want this page to render if there is no user in session
+//		if (session.getAttribute("session_user_id") == null) {
+//			return "redirect:/loginreg";
+//		}
+//
+//		Long userID = (Long) session.getAttribute("session_user_id");
+//		User thisUser = userServ.findUser(userID);
+//		model.addAttribute("thisUser", thisUser);
+//		model.addAttribute("thisUserCopy", thisUser);
+//
+//		return "accountInfo.jsp";
+//	}
+//
+//	@PostMapping("/edit/account")
+//	public String editAccount(@Valid @ModelAttribute("thisUserCopy") User editedUser, BindingResult result, HttpSession session, Model model) {
+//		// we don't want this page to render if there is no user in session
+//		if (session.getAttribute("session_user_id") == null) {
+//			return "redirect:/loginreg";
+//		}
+//
+//		Long userID = (Long) session.getAttribute("session_user_id");
+//		User thisUser = userServ.findUser(userID);
+//		
+//		if(result.hasErrors()) {
+//			model.addAttribute("thisUser", thisUser);
+//			return "accountInfo.jsp";
+//		}
+//		
+//
+//
+//		return "redirect:/account/info";
+//	}
 }

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LFG Requests for <c:out value="${thisGame.title}"/></title>
+<title>LFG Requests for <c:out value="${thisGame.title}" /></title>
 <!-- get Bootstrap from web -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -40,11 +40,14 @@
 			<c:if test="${username != null}">
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
-						data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/account/info">Account
-								Info</a></li>
-						<li><hr class="dropdown-divider"></li>
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Welcome,
+						<c:out value="${username}" />
+					</button>
+					<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+						<!-- <li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
+					<li><hr class="dropdown-divider"></li> -->
 						<li><a class="dropdown-item text-danger" href="/logout">Log
 								Out</a></li>
 					</ul>
@@ -53,8 +56,9 @@
 		</div>
 
 		<h1 class="text-center mt-3">
-			LFG Requests for
-			"<c:out value="${thisGame.title}" />"
+			LFG Requests for "
+			<c:out value="${thisGame.title}" />
+			"
 		</h1>
 		<div class="d-flex justify-content-center">
 			<a href="/game/${thisGame.id}/new/request" class="btn btn-success">Create
@@ -71,13 +75,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${thisGame.requestsForGame}" var="oneReq">
-				<tr>
-					<td><c:out value="${oneReq.platform}"/></td>
-					<td><a href="/game/${thisGame.id}/request/${oneReq.id}" style="color:white"><c:out value="${oneReq.activity}"/></a></td>
-					<td><c:out value="${oneReq.playersPresent}"/> / <c:out value="${oneReq.playerLimit}"/></td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd @ hh:mm a z" value="${oneReq.getCreatedAt()}" /></td>
-				</tr>
+				<c:forEach items="${allRequestsForGame}" var="oneReq">
+					<tr>
+						<td><c:out value="${oneReq.platform}" /></td>
+						<td><a href="/game/${thisGame.id}/request/${oneReq.id}"
+							style="color: white"><c:out value="${oneReq.activity}" /></a></td>
+						<td><c:out value="${oneReq.playersPresent}" /> / <c:out
+								value="${oneReq.playerLimit}" /></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd @ hh:mm a z"
+								value="${oneReq.getCreatedAt()}" /></td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>

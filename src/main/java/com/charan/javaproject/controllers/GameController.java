@@ -52,11 +52,17 @@ public class GameController {
 	}
 
 	@GetMapping("/new/game")
-	public String createGamePage(@ModelAttribute("newGame") Game game, HttpSession session) {
+	public String createGamePage(@ModelAttribute("newGame") Game game, HttpSession session, Model model) {
 		// we don't want this page to render if there is no user in session
 		if (session.getAttribute("session_user_id") == null) {
 			return "redirect:/loginreg";
 		}
+		
+		Long userID = (Long) session.getAttribute("session_user_id");
+		User user = userServ.findUser(userID);
+		
+		String username = user.getUsername();
+		model.addAttribute("username", username);
 
 		return "createGame.jsp";
 	}
@@ -93,6 +99,17 @@ public class GameController {
 
 		Game thisGame = gameServ.findGame(gameID);
 		model.addAttribute("thisGame", thisGame);
+		
+		List<GameRequest> olderReqs = gameReqServ.oldReqsOnly(thisGame);
+//		System.out.println(olderReqs);
+		
+		for(GameRequest oneReq : olderReqs) {
+//			System.out.println(oneReq.getActivity());
+			gameReqServ.deleteGameRequest(oneReq.getId());
+		}
+		
+		List<GameRequest> allRequestsForGame = gameReqServ.orderedGameReqs(thisGame);
+		model.addAttribute("allRequestsForGame", allRequestsForGame);
 
 		return "oneGame.jsp";
 	}
@@ -104,6 +121,12 @@ public class GameController {
 		if (session.getAttribute("session_user_id") == null) {
 			return "redirect:/loginreg";
 		}
+		
+		Long userID = (Long) session.getAttribute("session_user_id");
+		User user = userServ.findUser(userID);
+		
+		String username = user.getUsername();
+		model.addAttribute("username", username);
 
 		Game thisGame = gameServ.findGame(gameID);
 		model.addAttribute("thisGame", thisGame);
@@ -170,6 +193,10 @@ public class GameController {
 		model.addAttribute("oneRequest", oneRequest);
 		
 		Long userID = (Long) session.getAttribute("session_user_id");
+		User user = userServ.findUser(userID);
+		String username = user.getUsername();
+		model.addAttribute("username", username);
+		
 		
 		System.out.println(oneRequest.getGameRequestor().getId());
 		System.out.println(userID);

@@ -54,13 +54,21 @@ public class FireteamController {
 
 			model.addAttribute("username", loggedInUser.getUsername());
 		}
+		
+		List<LFGRequest> olderReqs = requestServ.oldLFGOnly();
+//		System.out.println(olderReqs);
+		
+		for(LFGRequest oneReq : olderReqs) {
+//			System.out.println(oneReq.getActivity());
+			requestServ.deleteRequest(oneReq.getId());
+		}
 
-		List<LFGRequest> requests = requestServ.allrequests();
+		List<LFGRequest> requests = requestServ.orderedRequests();
 		model.addAttribute("requests", requests);
 
 		return "allRequests.jsp";
 	}
-	
+
 	@GetMapping("/destiny/groups/playstation")
 	public String playstation(HttpSession session, Model model) {
 
@@ -71,19 +79,19 @@ public class FireteamController {
 
 			model.addAttribute("username", loggedInUser.getUsername());
 		}
-		
+
 		List<LFGRequest> anyPlatform = requestServ.requestsByPlatform("Any");
 		List<LFGRequest> playstationRequests = requestServ.requestsByPlatform("Playstation");
-		
-		for(LFGRequest anyReq : anyPlatform) {
+
+		for (LFGRequest anyReq : anyPlatform) {
 			playstationRequests.add(anyReq);
 		}
-		
+
 		model.addAttribute("playstationRequests", playstationRequests);
 
 		return "playstationRequests.jsp";
 	}
-	
+
 	@GetMapping("/destiny/groups/xbox")
 	public String xbox(HttpSession session, Model model) {
 
@@ -94,19 +102,19 @@ public class FireteamController {
 
 			model.addAttribute("username", loggedInUser.getUsername());
 		}
-		
+
 		List<LFGRequest> anyPlatform = requestServ.requestsByPlatform("Any");
 		List<LFGRequest> xboxRequests = requestServ.requestsByPlatform("Xbox");
-		
-		for(LFGRequest anyReq : anyPlatform) {
+
+		for (LFGRequest anyReq : anyPlatform) {
 			xboxRequests.add(anyReq);
 		}
-		
+
 		model.addAttribute("xboxRequests", xboxRequests);
 
 		return "xboxRequests.jsp";
 	}
-	
+
 	@GetMapping("/destiny/groups/pc")
 	public String PC(HttpSession session, Model model) {
 
@@ -117,14 +125,14 @@ public class FireteamController {
 
 			model.addAttribute("username", loggedInUser.getUsername());
 		}
-		
+
 		List<LFGRequest> anyPlatform = requestServ.requestsByPlatform("Any");
 //		System.out.println(anyPlatform);
-		
+
 		List<LFGRequest> pcRequests = requestServ.requestsByPlatform("PC");
 //		System.out.println(pcRequests);
-		
-		for(LFGRequest anyReq : anyPlatform) {
+
+		for (LFGRequest anyReq : anyPlatform) {
 			pcRequests.add(anyReq);
 //			System.out.println(pcRequests);
 		}
@@ -134,11 +142,17 @@ public class FireteamController {
 	}
 
 	@GetMapping("/destiny/create/request")
-	public String LFGrequestForm(@ModelAttribute("newReq") LFGRequest newRequest, HttpSession session) {
+	public String LFGrequestForm(@ModelAttribute("newReq") LFGRequest newRequest, HttpSession session, Model model) {
 		// we don't want this page to render if there is no user in session
 		if (session.getAttribute("session_user_id") == null) {
 			return "redirect:/loginreg";
 		}
+
+		Long userID = (Long) session.getAttribute("session_user_id");
+		User user = userServ.findUser(userID);
+
+		String username = user.getUsername();
+		model.addAttribute("username", username);
 
 		return "createRequest.jsp";
 	}
@@ -202,6 +216,10 @@ public class FireteamController {
 		}
 
 		Long userID = (Long) session.getAttribute("session_user_id");
+		User user = userServ.findUser(userID);
+		
+		String username = user.getUsername();
+		model.addAttribute("username", username);
 
 		LFGRequest thisRequest = requestServ.findRequest(requestID);
 		model.addAttribute("thisRequest", thisRequest);
@@ -225,13 +243,13 @@ public class FireteamController {
 		if (session.getAttribute("session_user_id") == null) {
 			return "redirect:/";
 		}
-		
-		if(result.hasErrors()) {
+
+		if (result.hasErrors()) {
 			return "editLFG.jsp";
 		} else {
 			requestServ.updateRequest(editedReq);
 			Long reqID = editedReq.getId();
-			return "redirect:/destiny/activity/"+reqID;
+			return "redirect:/destiny/activity/" + reqID;
 		}
 	}
 }

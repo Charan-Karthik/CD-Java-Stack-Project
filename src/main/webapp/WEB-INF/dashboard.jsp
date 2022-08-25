@@ -30,17 +30,27 @@
 <body>
 	<div class="container mt-4 fixed-top">
 		<c:if test="${username == null}">
-			<div class="d-flex justify-content-end align-items-center">
-				<a href="/loginreg" class="btn btn-dark">Sign Up/Log In</a>
+			<div class="d-flex justify-content-between align-items-center">
+				<a
+					href="https://www.paypal.com/donate/?business=XQPVNXAPA35XW&no_recurring=0&item_name=Support+further+development+for+Fireteam+Finder&currency_code=USD"
+					class="btn" style="background-color: #EE82EE">Support this
+					Project!</a> <a href="/loginreg" class="btn btn-dark">Sign Up/Log
+					In</a>
 			</div>
 		</c:if>
 		<c:if test="${username != null}">
-			<div class="dropdown d-flex justify-content-end">
+			<div
+				class="dropdown d-flex justify-content-between align-items-center">
+				<a
+					href="https://www.paypal.com/donate/?business=XQPVNXAPA35XW&no_recurring=0&item_name=Support+further+development+for+Fireteam+Finder&currency_code=USD"
+					class="btn" style="background-color: #EE82EE">Support this
+					Project!</a>
 				<button class="btn btn-secondary dropdown-toggle" type="button"
-					data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="/account/info">Account Info</a></li>
-					<li><hr class="dropdown-divider"></li>
+					data-bs-toggle="dropdown" aria-expanded="false">Welcome, <c:out value="${username}"/> </button>
+				<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+<!-- 					<li><a class="dropdown-item" href="/account/info">Account
+							Info</a></li>
+					<li><hr class="dropdown-divider"></li> -->
 					<li><a class="dropdown-item text-danger" href="/logout">Log
 							Out</a></li>
 				</ul>
@@ -71,7 +81,8 @@
 	</div>
 	<div
 		class="d-flex justify-content-center align-items-center fixed-bottom">
-		<a href="/all/games" class="btn btn-lg btn-outline-light">LFG Platform for Other Games</a>
+		<a href="/all/games" class="btn btn-lg btn-outline-light">LFG
+			Platform for Other Games</a>
 	</div>
 </body>
 </html>
