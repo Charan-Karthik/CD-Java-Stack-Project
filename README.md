@@ -16,4 +16,4 @@ Future features that will be implemented:
 
 ---
 
-Demo video and AWS deployment coming soon!
+Demo video coming soon!
