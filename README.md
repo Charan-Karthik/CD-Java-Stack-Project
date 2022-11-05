@@ -18,3 +18,8 @@ Future features that will be implemented:
 
 ## Demo Video
 <a href="https://youtu.be/94fCUJRo9pM"> Link to YouTube </a>
+
+---
+
+## Preview Screenshots
+<img width="1512" alt="Fireteam Finder Main Page Preview Screenshot" src="https://user-images.githubusercontent.com/107005249/200105875-c623f971-84d4-405e-84c5-67481ea81248.png">
