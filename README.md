@@ -16,4 +16,5 @@ Future features that will be implemented:
 
 ---
 
-Demo video coming soon!
+## Demo Video
+<a href="https://youtu.be/94fCUJRo9pM"> Link to YouTube </a
